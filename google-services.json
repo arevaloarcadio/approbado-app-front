@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "671741318708",
+    "project_id": "approbado-326903",
+    "storage_bucket": "approbado-326903.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671741318708:android:8de694d41290ab74ae9c61",
+        "android_client_info": {
+          "package_name": "com.approbado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671741318708-aia7i6m5tveeg2k4qtd9kc1kona2q0tq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuKZ5KP9_Cl5lsF26jDmjL_WRDH7igXfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671741318708-aia7i6m5tveeg2k4qtd9kc1kona2q0tq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

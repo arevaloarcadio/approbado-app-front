@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="google-signin-client_id" content="671741318708-aia7i6m5tveeg2k4qtd9kc1kona2q0tq.apps.googleusercontent.com">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta charset="utf-8" />
+    <title>Ionic App</title>
+
+    <base href="/" />
+
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <link rel="shortcut icon" type="image/png" href="<%= BASE_URL %>assets/icon/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="/css/fresco.css" />
+    
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Ionic App" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  </head>
+
+  <body>
+    <div id="app"></div>
+  </body>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="/js/jimp.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/fresco.min.js"></script>
+    <script type="text/javascript">
+      function valideKey(event){
+        console.log(event)
+        // code is the decimal ASCII representation of the pressed key.
+        var code = (event.which) ? event.which : event.keyCode;
+        
+        if(code == 8 || code == 43) { // backspace.
+          return true;
+        } else if(code>=48 && code<=57) { // is a number.
+          return true;
+        } else{ // other keys.
+          return false
+        }
+      }
+    </script>
+</html>
+

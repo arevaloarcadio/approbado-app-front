@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Approbado</string>
+    <string name="title_activity_main">Approbado</string>
+    <string name="package_name">com.approbado</string>
+    <string name="custom_url_scheme">com.approbado</string>
+    <string name="facebook_app_id">403919611251185</string>
+    <string name="facebook_login_protocol_scheme">fb403919611251185</string>
+</resources>

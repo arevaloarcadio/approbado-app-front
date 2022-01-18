@@ -1,0 +1,7 @@
+{
+  "name": "approbado",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

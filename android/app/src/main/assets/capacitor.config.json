@@ -1,0 +1,24 @@
+{
+	"appId": "com.approbado",
+	"appName": "Approbado",
+	"webDir": "dist",
+	"bundledWebRuntime": false,
+	"plugins": {
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		},
+		"GoogleAuth": {
+			"scopes": [
+				"profile",
+				"email"
+			],
+			"serverClientId": "671741318708-aia7i6m5tveeg2k4qtd9kc1kona2q0tq.apps.googleusercontent.com",
+			"forceCodeForRefreshToken": true
+		}
+	},
+	"cordova": {}
+}
