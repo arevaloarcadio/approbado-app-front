@@ -2,26 +2,30 @@
   <ion-content >
    <ion-slides pager="true" ref="slides">
       <ion-slide id="slide-1">
+      
         <span style="top: 17%;position: absolute;font-style: normal;font-weight: 600;font-size: 20px;line-height: 32px;text-align: center;color: #101521;">Aprende derecho de forma <br>práctica y divertida.</span>
-          <img src="svg/bro.svg" >
-          <br>
-          <button class="button-line font-button" style="position: absolute;top: 78%;" @click="next()">Siguiente</button> 
-          <br>
-          <label style="font-style: normal;font-weight: normal;font-size: 16px;line-height: 22px;color: #6D6D6D;position: absolute;top: 95%;" @click="$router.push('/pre_login')">Omitir
-          </label>
+        
+        <img src="svg/bro.svg" >
+         
+        <button class="button-line font-button" style="position: absolute;top: 78%;" @click="next()">Siguiente</button> 
+        <label style="font-style: normal;font-weight: normal;font-size: 16px;line-height: 22px;color: #6D6D6D;position: absolute;top: 95%;" @click="$router.push('/pre_login')">Omitir
+        </label>
+      
       </ion-slide>
       <ion-slide id="slide-2">
+        
         <span style="top: 17%;position: absolute;font-style: normal;font-weight: 600;font-size: 20px;line-height: 32px;text-align: center;color: #101521;">Practica para tus exámenes de <br> forma individual o en grupo.</span>
       
-        <img src="svg/bro2.svg" >
-          <br>
-          <button class="button-line font-button" style="position: absolute;top: 78%;" @click="next()">Siguiente</button> 
+        <img src="svg/bro2.svg">
+
+        <button class="button-line font-button" style="position: absolute;top: 78%;" @click="next()">Siguiente</button> 
       </ion-slide>
       <ion-slide id="slide-3">
-          <span style="top: 17%;position: absolute;font-style: normal;font-weight: 600;font-size: 20px;line-height: 32px;text-align: center;color: #101521;">Obtén premios y certifícate en <br> tus asignaturas favoritas.</span>
-          <img src="svg/bro3.svg" >
-           <br>
-          <button class="button-primary font-button" style="position: absolute;top: 78%;" @click="$router.push('/pre_login')">Empezar</button> 
+         
+        <span style="top: 17%;position: absolute;font-style: normal;font-weight: 600;font-size: 20px;line-height: 32px;text-align: center;color: #101521;">Obtén premios y certifícate en <br> tus asignaturas favoritas.</span>
+        <img src="svg/bro3.svg" >
+         
+        <button class="button-primary font-button" style="position: absolute;top: 78%;" @click="$router.push('/pre_login')">Empezar</button> 
           
       </ion-slide>
     </ion-slides>    

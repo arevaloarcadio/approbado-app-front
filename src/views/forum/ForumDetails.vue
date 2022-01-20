@@ -140,7 +140,7 @@ export default defineComponent({
       axios
       .get("/users/"+this.forum.created_by)
       .then(res => {
-        this.user = res.data.data
+        this.user = res.data
       })
       .catch(err => {
         console.log(err)
