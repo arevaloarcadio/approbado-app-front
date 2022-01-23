@@ -25,12 +25,14 @@
       <button class="button-primary font-button" @click="login">Iniciar Sesión</button> 
       <br>   
       <br>
-      <a  class="text-control">Inicia sesión con un tercero</a>
-      <br>
-      <br>  
-      <img @click="loginGoogle" src="/svg/btn_google.svg">
-      <br>
-      <img @click="loginFacebook" src="/svg/btn_facebook.svg">
+      <div v-show="!showAppleSignIn">
+        <a class="text-control">Inicia sesión con un tercero</a>
+        <br>
+        <br>  
+        <img @click="loginGoogle" src="/svg/btn_google.svg">
+        <br>
+        <img @click="loginFacebook" src="/svg/btn_facebook.svg">
+      </div>
       <p style="font-family: Segoe UI;font-style: normal;font-weight: normal;font-size: 16px;line-height: 21px;text-align: center;color: #000000;">
         ¿Aún no tienes una cuenta? 
         <br>  
@@ -53,6 +55,8 @@ import user from "@/plugins/jwt/user";
 import toast from '@/toast'
 import { FacebookLogin } from '@capacitor-community/facebook-login';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core'
+import '@capacitor/device';
 
 export default defineComponent({
   components: { IonContent },
@@ -61,10 +65,14 @@ export default defineComponent({
       email : null,
       password : null,
       token : null,
-      fb_user : null
+      fb_user : null,
+      showAppleSignIn : false
     }
   },
   mounted(){
+  
+  this.show_ios()
+  
   GoogleAuth.init()
    
     window.fbAsyncInit = function() {
@@ -89,6 +97,10 @@ export default defineComponent({
     ...mapActions([
           'setAuthUser',
     ]),
+    async show_ios(){
+      let device = await Plugins.Device.getInfo();
+      this.showAppleSignIn = device.platform === 'ios';
+    },
     async login(){
       var loading = await toast.showLoading()
 

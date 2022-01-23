@@ -38,12 +38,14 @@
       <div align="center"> 
         <button class="button-primary font-button" @click="register()">Crear cuenta</button> 
       <br><br>
-      <a  class="text-control">Registrate con un tercero</a>
-      <br>
-      <br>  
-      <img @click="loginGoogle" src="/svg/btn_google.svg">
-      <br>
-      <img @click="loginFacebook" src="/svg/btn_facebook.svg">
+      <div v-show="!showAppleSignIn">
+        <a  class="text-control">Registrate con un tercero</a>
+        <br>
+        <br>  
+        <img @click="loginGoogle" src="/svg/btn_google.svg">
+        <br>
+        <img @click="loginFacebook" src="/svg/btn_facebook.svg">
+      </div>
         <p style="font-family: Segoe UI;font-style: normal;font-weight: normal;font-size: 16px;line-height: 21px;text-align: center;color: #000000;">
           ¿Ya tienes una cuenta?
         <br>  
@@ -67,7 +69,8 @@ import axios from 'axios'
 import jwtToken from "@/plugins/jwt/jwt-token";
 import {mapActions} from "vuex";
 import user from "@/plugins/jwt/user";
-
+import { Plugins } from '@capacitor/core'
+import '@capacitor/device';
 
 export default defineComponent({
   name : 'Register',
@@ -81,6 +84,7 @@ export default defineComponent({
     }
   },
   mounted(){
+    this.show_ios()
     GoogleAuth.init()
 
     window.fbAsyncInit = function() {
@@ -105,6 +109,10 @@ export default defineComponent({
       ...mapActions([
           'setAuthUser',
     ]),
+    async show_ios(){
+      let device = await Plugins.Device.getInfo();
+      this.showAppleSignIn = device.platform === 'ios';
+    },
     register(){
 
       if (!this.accepted) {
