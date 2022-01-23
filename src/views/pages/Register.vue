@@ -80,7 +80,8 @@ export default defineComponent({
       user_name : null,
       email : null,
       password : null,
-      accepted : false
+      accepted : false,
+      showAppleSignIn : false
     }
   },
   mounted(){
