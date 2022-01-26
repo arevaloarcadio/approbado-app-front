@@ -36,7 +36,7 @@ axios
 	modal.dismiss()
 
 	if (mode == 'trivia_random') {
-	this.$router.push({ name: 'select_difficulty_themes', params : {trivia_id : this.random.trivia_id},query : {award_id : this.random.award_id, subtheme_name : this.random.title , trivia_name : this.random.trivia?.name, subtheme_id :  this.random.id }})
+	this.$router.push({ name: 'select_difficulty_themes', params : {trivia_id : this.random.trivia_id},query : {award_id : this.random.award_id, subtheme_name : this.random.name , trivia_name : this.random.trivia?.name, subtheme_id :  this.random.id }})
 	}
 
 	if (mode == 'trivia_subtheme') {

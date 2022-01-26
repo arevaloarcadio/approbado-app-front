@@ -84,7 +84,7 @@
         </p>
         <p v-if=" result?.answer?.option_id != result?.option_right?.id" style="font-family: Segoe UI;font-style: normal;font-weight: normal;font-size: 14px;line-height: 19px;color: #333333;margin-left: 18px;">Nota: {{result?.explanation}}
         </p>
-        <ion-row v-if="result?.answer?.option_id != result?.option_right?.id" style="margin-left: 18px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 21px;text-decoration-line: underline;color: #333333;" @click="getFile(result?.file?.file)">
+        <ion-row v-if="result?.answer?.option_id != result?.option_right?.id && file_id != null" style="margin-left: 18px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 21px;text-decoration-line: underline;color: #333333;" @click="getFile(result?.file?.file)">
           Para más detalle ver recursos
             <img src="svg/enlace.svg"  style="margin-left: 10px;"><br>
         </ion-row>

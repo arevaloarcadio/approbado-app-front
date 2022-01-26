@@ -1,9 +1,11 @@
 <template>
-  <div style="display: flex;justify-content: center;margin-top: 32px;" > 
-     <p style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 18px;margin-top: -2px;line-height: 24px;color: #101521;">
-       Agendar una trivia
-     </p>
-  </div>
+  <ion-row>
+       <ion-col>
+        <img src="svg/arrow_back.svg" @click="$router.go(-1)" style="margin-left: 36px;margin-top: 32px;">
+          
+           <p style="margin-top: -4px;font-family: Segoe UI;font-style: normal;text-align: center; font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;margin-top: -20px;">Agendar una trivia</p>
+      </ion-col>
+    </ion-row>
 
   <div style="display: flex;justify-content: center;margin-top: 15px;" > 
      <img src="svg/step_2.svg">
@@ -165,7 +167,7 @@ export default defineComponent({
         let sub_themes = [];
           res.data.data.forEach((data,key) =>{
               sub_themes[key] = data
-              sub_themes[key]['name'] = data.title
+              sub_themes[key]['name'] = data.name
           })
 
           this.sub_themes = sub_themes

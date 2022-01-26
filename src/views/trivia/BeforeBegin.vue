@@ -55,6 +55,7 @@ import axios from 'axios'
 import { mapGetters } from 'vuex'
 import Tabs1 from '@/components/Tabs'
 
+
 export default defineComponent({
 	name: 'App',
   components: {Tabs1},
@@ -155,6 +156,12 @@ export default defineComponent({
       .then(res => {
         console.log(res)
         loading.dismiss()
+        
+        if (this.questions == 0) {
+          toast.openToast("La trivia actualmente no tiene preguntas, por favor notificar al administrador","error",2000)
+          return
+        }
+
         this.$router.push({ 
           name: 'answers', 
           params : { 

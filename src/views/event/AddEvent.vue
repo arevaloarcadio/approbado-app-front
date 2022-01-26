@@ -1,9 +1,13 @@
 <template>
-  <div style="display: flex;justify-content: center;margin-top: 32px;" > 
-     <p style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 18px;margin-top: -2px;line-height: 24px;color: #101521;">
-       Agendar una trivia
-     </p>
-  </div>
+
+
+  <ion-row>
+       <ion-col>
+        <img src="svg/arrow_back.svg" @click="$router.go(-1)" style="margin-left: 36px;margin-top: 32px;">
+          
+           <p style="margin-top: -4px;font-family: Segoe UI;font-style: normal;text-align: center; font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;margin-top: -20px;">      Agendar una trivia</p>
+      </ion-col>
+    </ion-row>
 
   <div style="display: flex;justify-content: center;margin-top: 15px;" > 
      <img src="svg/step_1.svg">
@@ -56,12 +60,15 @@
 
 import { defineComponent } from 'vue';
 import { IonContent } from '@ionic/vue';
+import moment from 'moment'
+import toast from '@/toast'
 
 export default defineComponent({
   components: { IonContent },
   data(){
     return{
       time_focus : false,
+      date_fail : false,
       title :  null,
       description :  null,
       date : null,
@@ -111,6 +118,15 @@ export default defineComponent({
         }, 50);
         return
       }
+
+      if (moment($event.target.value).valueOf() < new Date().getTime()) {
+          console.log(moment($event.target.value).valueOf())
+        if ($event.target.value.split('-')[2] != new Date().getDate()) {
+          this.date_fail = true
+        }
+      }else{
+         this.date_fail = false
+      }
       let date = $event.target.value
       let split_date = date.split('-')
       this.date = split_date[2]+"/"+split_date[1]
@@ -119,6 +135,10 @@ export default defineComponent({
       }, 50);
     },
     next(){
+      if (this.date_fail) {
+          toast.openToast("La fecha del evento deber ser posterior a la fecha actual","error",2000)
+          return
+      }
       this.$router.push({path : '/add_event_step_two',query : {title :  this.title,description :   this.description,date :  this.date,time :  this.time }})
     },
   }   

@@ -13,6 +13,7 @@ import com.capacitorjs.plugins.haptics.HapticsPlugin;
 import com.capacitorjs.plugins.app.AppPlugin;
 import com.capacitorjs.plugins.camera.CameraPlugin;
 import com.capacitorjs.plugins.clipboard.ClipboardPlugin;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends BridgeActivity {
     @Override
@@ -28,6 +29,8 @@ public class MainActivity extends BridgeActivity {
             add(KeyboardPlugin.class);
             add(HapticsPlugin.class);
             add(AppPlugin.class);
+
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             // Additional plugins you've installed go here
             // Ex: add(TotallyAwesomePlugin.class);
         }});

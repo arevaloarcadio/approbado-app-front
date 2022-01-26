@@ -18,7 +18,7 @@
     <div v-for="award in award_subthemes" :key="award">
       <div :class="{'active-div' : button_segment_active == 'Temario', 'no-active-div' : button_segment_active != 'Temario'}">
        <div style="background: #FFFFFF;border-radius: 6px;flex: none;order: 0;flex-grow: 0;margin: 12px 0px;display: flex;flex-direction: row;align-items: center;padding: 12px;">
-        <img :src="$base_public+award.icon" style="width: 24px;height: 24px">&nbsp;&nbsp;&nbsp;
+        <img :src="$base_public+award.file" style="width: 24px;height: 24px">&nbsp;&nbsp;&nbsp;
 
          <span style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 15px;line-height: 20px;color: #000000;">
            {{award.title}}
@@ -30,7 +30,7 @@
         </div>
 
         <div v-else style="text-align: right;margin-top: -45px;margin-right: 15px;">
-          <img :src="$base_public+award.icon">
+          <img :src="$base_public+award.file">
         </div>
         <div style="margin-top: 25px"></div>
    
@@ -38,7 +38,7 @@
       <div :class="{'item-triva' : theme_seleted[theme.num_theme], 'item-finished' : theme.finished}" style="background: #FFFFFF;border-radius: 6px;flex: none;order: 0;flex-grow: 0;margin: 12px 0px;display: flex;flex-direction: row;align-items: center;padding: 12px;">
         
         <span  style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 15px;line-height: 20px;color: #000000;">
-          {{theme.num_theme+'. '+theme.title}}
+          {{theme.num_theme+'. '+theme.name}}
          </span>
         </div>
         <div v-if="theme.finished" style="font-family: Segoe UI;font-style: normal;font-weight: bold;font-size: 14px;line-height: 19px;text-align: right;color: #B7B7B7;margin-top: -45px;margin-right: 15px; ">
@@ -50,7 +50,7 @@
         <center>
           <div v-if="theme_seleted[theme.num_theme]" style="display: flex;flex-direction: row;justify-content: center;align-items: center;    margin-top: 24px;">  
             
-            <button @click="$router.push({ name: 'select_difficulty_themes', params : {trivia_id : award.trivia_id},query : {award_id : award.id, subtheme_name : theme.title , trivia_name : trivia?.name, subtheme_id : theme.id }})" style="width: 342px;height: 48px;background: linear-gradient(127.82deg, #F6FA00 1.71%, #FFE835 97.57%);border-radius: 6px;">Iniciar trivia</button>
+            <button @click="$router.push({ name: 'select_difficulty_themes', params : {trivia_id : award.trivia_id},query : {award_id : award.id, subtheme_name : theme.name , trivia_name : trivia?.name, subtheme_id : theme.id }})" style="width: 342px;height: 48px;background: linear-gradient(127.82deg, #F6FA00 1.71%, #FFE835 97.57%);border-radius: 6px;">Iniciar trivia</button>
            
           </div>
         </center>

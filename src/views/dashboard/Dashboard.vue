@@ -57,7 +57,7 @@
       </ion-col>
     </ion-row>
     
-    <div v-if="recent_trivias.length !=0" style="display: flex;justify-content: center;" > 
+    <div v-if="recent_trivias.length !=0" style="display: flex;justify-content: center;" @click="$router.push({name :'details_trivia_themes',params: {trivia_id: recent_trivias.id}})" > 
       <div class="test-popular" style="z-index: 1;"> 
         <p style="text-align: left;padding-left: 22px;padding-top: 60px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;">
          {{recent_trivias.name}}
