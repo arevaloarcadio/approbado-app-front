@@ -30,7 +30,7 @@
            </ion-row>
            <br>
            
-           <button :style="style.button"  @click="initTrivia()">Iniciar trivia</button>
+           <button :style="style.button" v-if="event.button_enable == 'true'"  @click="initTrivia()">Iniciar trivia</button>
 
            <p style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 14px;line-height: 22px;color: #6D6D6D;">
              Título
@@ -128,6 +128,7 @@ export default defineComponent({
   },
   mounted(){
     this.event = this.$route.query 
+        console.log(this.event )
     var parts = this.event.starts_at.slice(0, -1).split('T');
     console.log(parts)
     this.style.button.background = this.event.color

@@ -29,7 +29,7 @@
         &nbsp;&nbsp;&nbsp;
         <div class="input-icons" > 
           <i class="icon"  style="margin-left: 9px;"><img v-show="!time_focus" src="/svg/clock_icon.svg"></i>
-          <input type="text" name="title" v-model="time" @focus="time_focus = true" @blur="time_focus = false" onfocus="(this.type='time')" onblur="(this.type='text')"  style="width:127px;margin-right: -23px;padding-left: 30px;" placeholder="00:00" class="input-form input-field">
+          <input type="text" name="title" v-model="time" @focus="time_focus = true" @blur="getTime($event)" onfocus="(this.type='time')" onblur="(this.type='text')"  style="width:127px;margin-right: -23px;padding-left: 30px;" placeholder="00:00" class="input-form input-field">
         </div>
        </div>  
     </div>
@@ -115,7 +115,7 @@
     </center>
      <div style="display: flex;justify-content: center;margin-top: 3px;">
         
-        <textarea  class="input-form input-field" style="width: 311px;height: 80px;padding-top: 4px;" placeholder="Reunión para ver conceptos de la clase de hoy." v-model="event.description ">
+        <textarea  class="input-form input-field" style="width: 311px;height: 80px;padding-top: 4px;" placeholder="Reunión para ver conceptos de la clase de hoy." v-model="event.description">
          
         </textarea>
      </div>
@@ -168,6 +168,7 @@ export default defineComponent({
       subtheme_id : null,
       notify_before : false,
       user_ids : [],
+      date_fail : false
 
     }
   },
@@ -189,7 +190,7 @@ export default defineComponent({
     ]),
   },
   methods:{
-     getDate($event){
+      getDate($event){
       this.date_focus = false
       if ($event.target.value == "") {
         setTimeout(() => {
@@ -197,12 +198,28 @@ export default defineComponent({
         }, 50);
         return
       }
+
+      if (moment($event.target.value).valueOf() < new Date().getTime()) {
+        if ($event.target.value.split('-')[2] != new Date().getDate()) {
+          this.date_fail = true
+        }
+      }else{
+         this.date_fail = false
+      }
       let date = $event.target.value
       let split_date = date.split('-')
       this.date = split_date[2]+"/"+split_date[1]
       setTimeout(() => {
           document.querySelector('#date_event').value = this.date
       }, 50);
+    },
+    getTime($event){
+      this.time_focus = false
+      if (moment(this.date+'/'+(new Date().getFullYear())+' '+$event.target.value).valueOf() < new Date().getTime()) {
+        this.date_fail = true
+      }else{
+        this.date_fail = false
+      }
     },
     checked(event){
       event.target.checked ? this.notify_before = false : this.notify_before = true  
@@ -301,13 +318,9 @@ export default defineComponent({
       axios
       .get("/subthemes?trivia_id="+trivia_id)
       .then(res => {
-        let sub_themes = [];
-          res.data.data.forEach((data,key) =>{
-              sub_themes[key] = data
-              sub_themes[key]['name'] = data.title
-          })
+        
 
-          this.sub_themes = sub_themes
+          this.sub_themes = res.data.data
       })
       .catch(err => {
         console.log(err)
@@ -315,9 +328,29 @@ export default defineComponent({
     },
     async update(){
       
-    let loading = await toast.showLoading()
+ 
+    if (this.date_fail) {
+          toast.openToast("La fecha del evento deber ser posterior a la fecha actual","error",2000)
+          return
+      }
 
-    await loading.present(); 
+      if (this.event.title == ''  || 
+        this.date == null  || 
+        this.time == null  || 
+        this.level_id == null || 
+        this.subtheme_id == null || 
+        this.event.share_link == null || 
+        this.event.description == null || 
+        this.user_ids.length == 1 || 
+        this.notify_before == null  
+        ){
+        toast.openToast("Complete los datos restantes","error",2000)
+        return
+      }
+
+      let loading = await toast.showLoading()
+
+       await loading.present(); 
 
       let data = {
         title : this.event.title,
@@ -385,7 +418,7 @@ export default defineComponent({
       .get("/subthemes/"+this.event.subtheme_id)
       .then(res => {
         console.log()
-        this.subtheme = res.data.title
+        this.subtheme = res.data.name
         this.subtheme_id = res.data.id
         this.getTrivia(res.data.id)
 

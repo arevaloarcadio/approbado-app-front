@@ -34,7 +34,7 @@
         &nbsp;&nbsp;&nbsp;
         <div class="input-icons" > 
           <i class="icon"  style="margin-left: 9px;"><img v-show="!time_focus" src="/svg/clock_icon.svg"></i>
-          <input type="text" name="title" v-model="time" @focus="time_focus = true" @blur="time_focus = false" onfocus="(this.type='time')" onblur="(this.type='text')"  style="width:127px;margin-right: -23px;padding-left: 30px;" placeholder="00:00" class="input-form input-field">
+          <input type="text" name="title" v-model="time" @focus="time_focus = true" @blur="getTime($event)" onfocus="(this.type='time')" onblur="(this.type='text')"  style="width:127px;margin-right: -23px;padding-left: 30px;" placeholder="00:00" class="input-form input-field">
         </div>
        </div> 
   
@@ -49,7 +49,7 @@
         <br>
         <center>
            <button class="button-primary font-button" @click="next()">Añadir amigos</button> <br>
-           <button class="button-line font-button" style="margin-top: 14px;" @click="$router.push('/add_event_step_two')">Descartar</button> 
+           <button class="button-line font-button" style="margin-top: 14px;" @click="$router.go(-1)">Cancelar</button> 
         </center>
       </div>
       
@@ -120,7 +120,6 @@ export default defineComponent({
       }
 
       if (moment($event.target.value).valueOf() < new Date().getTime()) {
-          console.log(moment($event.target.value).valueOf())
         if ($event.target.value.split('-')[2] != new Date().getDate()) {
           this.date_fail = true
         }
@@ -134,11 +133,25 @@ export default defineComponent({
           document.querySelector('#date_event').value = this.date
       }, 50);
     },
+    getTime($event){
+      this.time_focus = false
+      if (moment(this.date+'/'+(new Date().getFullYear())+' '+$event.target.value).valueOf() < new Date().getTime()) {
+        this.date_fail = true
+      }else{
+        this.date_fail = false
+      }
+    },
     next(){
       if (this.date_fail) {
           toast.openToast("La fecha del evento deber ser posterior a la fecha actual","error",2000)
           return
       }
+
+      if (this.title == null  || this.date == null  || this.time == null  || this.description == null){
+        toast.openToast("Complete los datos restantes","error",2000)
+        return
+      }
+      
       this.$router.push({path : '/add_event_step_two',query : {title :  this.title,description :   this.description,date :  this.date,time :  this.time }})
     },
   }   

@@ -55,6 +55,10 @@
     </div>
     <br>
   </template> 
+  <center>
+     <button class="button-primary font-button" @click="$router.push('/dashboard')">Salir</button>
+  </center>
+   
   </ion-content>
 </template>
 

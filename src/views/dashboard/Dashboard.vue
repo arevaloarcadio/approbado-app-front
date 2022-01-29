@@ -37,7 +37,7 @@
           <template v-for="user in event.participants" :key="user">
             <template v-if="user.id == getUser.id">
             <button v-if="user.finished" style="background: #1D70D0;width: 138px;height: 30px;font-family: Segoe UI;font-style: normal;font-weight: bold;font-size: 12px;line-height: 16px;color: #FFFFFF;" @click="$router.push({ name: 'details_group_trivia', params : {trivia_id : event.id}, query : {level_id : event.level_id,subtheme_id : event.subtheme_id, event_id : event.id}})">Ver</button>
-            <button v-else style="background: #1D70D0;width: 138px;height: 30px;font-family: Segoe UI;font-style: normal;font-weight: bold;font-size: 12px;line-height: 16px;color: #FFFFFF;" @click="$router.push({name : 'details_trivia', params : { trivia_id : event.id},query : {...event}})">Ver</button>
+            <button v-else style="background: #1D70D0;width: 138px;height: 30px;font-family: Segoe UI;font-style: normal;font-weight: bold;font-size: 12px;line-height: 16px;color: #FFFFFF;" @click="$router.push({name : 'details_trivia', params : { trivia_id : event.id},query : {...event,button_enable : true}})">Ver</button>
           </template>
           </template>
         </template>
@@ -93,15 +93,15 @@
     
       <div style="display: flex;justify-content: center;margin-top: 5px;" > 
 
-          <div  style="width: 311px;margin-left: 10px;height: 68px;background: #FFFFFF;border-radius: 12px;" >
+          <div  style="width: 311px;margin-left: 10px;height: auto; padding-bottom: 0px; background: #FFFFFF;border-radius: 12px;" >
             <ion-row>  
-              <ion-col @click="$router.push({name : 'details_trivia', params : { trivia_id : pending_event.id},query : {...pending_event}})">
+              <ion-col @click="$router.push({name : 'details_trivia', params : { trivia_id : pending_event.id},query : {...pending_event , button_enable : false}})">
                 
-                <svg  style="position: absolute;margin-top: 6px;"  width="7" height="45" viewBox="0 0 7 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg  style="position: absolute;margin-top: 10px;"  width="7" height="45" viewBox="0 0 7 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect y="-1.52588e-05" width="6.07377" height="45" rx="3.03689" :fill="pending_event.color"/>
                 </svg>
 
-                <p style="padding-left: 26px;margin-top: 8px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 22px;color: #333333;">
+                <p style="padding-left: 26px;margin-top: 10px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 22px;color: #333333;">
                       {{pending_event.title}}
                 </p>
                 <p style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 12px;line-height: 22px;color: #6D6D6D;    margin-left: 27px;margin-top: -14px;">
@@ -109,7 +109,7 @@
                 </p>
               </ion-col>
               <ion-col>
-                <img src="svg/points.svg"   @click="openPopover($event,pending_event)" style="margin-left: 118px;margin-top: 28px;">
+                <img src="svg/points.svg"   @click="openPopover($event,pending_event)" style="margin-left: 118px;margin-top: 32px;">
               </ion-col>
             </ion-row>
           </div>

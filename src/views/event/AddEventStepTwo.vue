@@ -292,6 +292,10 @@ export default defineComponent({
         toast.openToast("Debe añadir al menos dos participantes","error",2000);
         return 
       }
+      if (this.trivia == null  || this.level == null  || this.sub_theme == null){
+        toast.openToast("Complete los datos restantes","error",2000)
+        return
+      }
       
       this.$router.push({
         path : '/add_event_step_three', 

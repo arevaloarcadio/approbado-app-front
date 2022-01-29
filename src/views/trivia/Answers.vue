@@ -40,7 +40,7 @@
               <ion-col>
                 <ion-radio  color="primary" :id="'response_'+key"    @click="select_response(response_answer,key)"></ion-radio>
               </ion-col>
-                <label style="margin-top: 5px;margin-left: 5px;" @click="select_response(response_answer,key)">{{response_answer.statement}}</label>
+                <label style="margin-top: 5px;margin-left: 5px;width: 250px" @click="select_response(response_answer,key)">{{response_answer.statement}}</label>
             </ion-row>  
           </div>
         </div>
@@ -190,7 +190,7 @@ export default defineComponent({
       await loading.present();
       
       axios
-      .get("/questions?filter[subtheme_id]="+this.subtheme_id+"&filter[level_id]="+this.level_id+"&options=true")
+      .get("/questions?filter[subtheme_id]="+this.subtheme_id+"&filter[level_id]="+this.level_id+"&filter[options]=true")
       .then(res => {
         loading.dismiss()
         this.questions = res.data.data
@@ -274,16 +274,14 @@ export default defineComponent({
 
         if((this.answer+1) == this.total_answers){
           clearInterval(this.timer);
-          var loading = await toast.showLoading()
-
-          await loading.present();
+          
           
           Promise.all([
             this.postAnswer(this.response),
             
           ]).finally(() => {
             this.verifyAnswer()
-            loading.dismiss()
+            
           });
 
         }else{
@@ -346,7 +344,10 @@ export default defineComponent({
         })
       }
     },
-    verifyAnswer(){
+    async verifyAnswer(){
+      var loading = await toast.showLoading()
+
+      await loading.present(); 
       
       let data = {
         user_id : this.getUser.id, 
@@ -359,6 +360,7 @@ export default defineComponent({
       axios
       .post("/awards/verify",data)
       .then(res => {
+        loading.dismiss()
         console.log(res)
         
         for (var i = 0; i < 99999; i++) {
@@ -386,7 +388,7 @@ export default defineComponent({
         }
       })
       .catch(err => {
-
+        loading.dismiss()
         console.log(err)
       });
     
@@ -434,13 +436,13 @@ export default defineComponent({
   }
 
   .not-selected{
-    border: 1px solid #6D6D6D;box-sizing: border-box;border-radius: 6px;display: flex;flex-direction: row;align-items: flex-start;padding: 12px 0px 12px 12px;width: 311px;height: 48px;
+    border: 1px solid #6D6D6D;box-sizing: border-box;border-radius: 6px;display: flex;flex-direction: row;align-items: flex-start;padding: 12px 0px 5px 12px;width: 311px;height: auto;
   }
 
   .selected{
     background: #ECEDF0;
 border-radius: 6px;
-box-sizing: border-box;display: flex;flex-direction: row;align-items: flex-start;padding: 12px 0px 12px 12px;width: 311px;height: 48px;
+box-sizing: border-box;display: flex;flex-direction: row;align-items: flex-start;padding: 12px 0px 5px 12px;width: 311px;height: auto;
   }
   .img-friends-grupal{
     width: 36px;height: 36px;border-radius: 25px;
