@@ -541,6 +541,15 @@ height: 541px;
   position: absolute;
 }
 
+
+.card-trivias-dashboard{
+  width: 311px;
+  height: 177px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12);
+  background: #FFE835;
+  border-radius: 12px;
+}
+
 ion-content{
   background: #F8F8FC;
 }

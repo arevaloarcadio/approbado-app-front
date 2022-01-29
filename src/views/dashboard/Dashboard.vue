@@ -131,8 +131,9 @@
       <ion-col v-if="top_trivias.length !=0" style=" display: flex; overflow-x: auto;white-space: nowrap;box-shadow: inherit;margin-left: 15px" >
         <template v-for="trivia in top_trivias" :key="trivia"> 
           <CardTrivia  v-if="trivia.subthemesCount != 0" @click="$router.push({name :'details_trivia_themes',params: {trivia_id: trivia.id}})" :locked="false" :title="trivia.name" :themes="trivia.subthemesCount+' temas'"></CardTrivia>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </template>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
       </ion-col>
      </div>
      
@@ -151,8 +152,9 @@
       <ion-col v-if="hard_trivias.length !=0" style=" display: flex; overflow-x: auto;white-space: nowrap;box-shadow: inherit;margin-left: 15px" >
         <template v-for="trivia in hard_trivias" :key="trivia"> 
           <CardTrivia  :locked="true" :title="trivia.name" :themes="trivia.subthemesCount+' temas'"></CardTrivia>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </template>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
       </ion-col>
      </div>
   </ion-content>
