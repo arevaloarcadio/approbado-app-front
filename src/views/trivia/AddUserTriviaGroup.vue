@@ -145,7 +145,7 @@ export default defineComponent({
         this.users.forEach(user => {
           user.selected = false
           this.props_users_selected.forEach(user_selected => {
-            if(user_selected.email == user.email){
+            if(user_selected.id == user.id){
               user.selected = true
               if (user_selected['disabled']) {
                 user['disabled'] = true
@@ -159,7 +159,7 @@ export default defineComponent({
           })
 
           this.users_selected.forEach(user_selected => {
-            if(user_selected.email == user.email){
+            if(user_selected.id == user.id){
               user.selected = true
               if (user_selected['disabled']) {
                 user['disabled'] = true

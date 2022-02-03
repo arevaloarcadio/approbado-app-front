@@ -153,7 +153,7 @@ import tabs from '@/views/components/Tabs'
 import  '@capacitor/core'
 import { Haptics } from '@capacitor/haptics';
 import Tabs1 from '@/components/Tabs'
-moment.locale('es');
+
 
 export default defineComponent({
   components: { IonContent ,tabs,Tabs1},
@@ -187,6 +187,7 @@ export default defineComponent({
     
   },
   mounted(){
+    moment.locale('es');
     this.get_chats()
     this.get_requests()
     io.socket().on('new_message', (new_message) => {

@@ -44,8 +44,8 @@
     </div>
     <template  v-for="comment in comments" :key="comment" >
     <div @click="$router.push({name : 'forum.details',params : { forum_id : comment.id} , query : {...comment }})" style="display: flex;justify-content: center;" >
-      <img :src="$base_public+comment?.user?.picture" style="margin-left: -77px;width: 36px;height: 36px;border-radius: 25px;">
-      <p style="font-family: Segoe UI;width: 80px; font-style: normal;font-weight: 600;font-size: 16px;line-height: 26px;color: #000000;flex: none;order: 0;flex-grow: 0;margin-left: 11px;margin-top: 2px;">{{comment?.user?.names}}</p>
+      <img :src="$base_public+comment?.owner?.picture" style="margin-left: -77px;width: 36px;height: 36px;border-radius: 25px;">
+      <p style="font-family: Segoe UI;width: 80px; font-style: normal;font-weight: 600;font-size: 16px;line-height: 26px;color: #000000;flex: none;order: 0;flex-grow: 0;margin-left: 11px;margin-top: 2px;">{{comment?.owner?.names}}</p>
     
       <p style="font-family: Segoe UI;flex: none;order: 0;flex-grow: 0;font-style: normal;font-weight: bold;font-size: 14px;line-height: 19px;color: #6D6D6D;margin-top: 6px;margin-left: -17px;">
         <img src="svg/point_separator.svg" style="margin-top: -5px;" >&nbsp;

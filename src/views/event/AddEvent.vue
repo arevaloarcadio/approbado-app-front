@@ -1,14 +1,12 @@
 <template>
-
-
   <ion-row>
-       <ion-col>
-        <img src="svg/arrow_back.svg" @click="$router.go(-1)" style="margin-left: 36px;margin-top: 32px;">
-          
-           <p style="margin-top: -4px;font-family: Segoe UI;font-style: normal;text-align: center; font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;margin-top: -20px;">      Agendar una trivia</p>
-      </ion-col>
-    </ion-row>
-
+    <ion-col>
+      <img src="svg/arrow_back.svg" @click="$router.go(-1)" style="margin-left: 36px;margin-top: 32px;">
+      <p style="margin-top: -4px;font-family: Segoe UI;font-style: normal;text-align: center; font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;margin-top: -20px;">      
+        Agendar una trivia
+      </p>
+    </ion-col>
+  </ion-row>
   <div style="display: flex;justify-content: center;margin-top: 15px;" > 
      <img src="svg/step_1.svg">
   </div>
@@ -18,14 +16,13 @@
         <label style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 14px;line-height: 19px;color: #6D6D6D;position: absolute;margin-top: -25px;">Título de la reunión</label>
         <input type="text" name="title" class="input-form" style="width :312px;" placeholder="Ingresar un título" v-model="title" > 
       </center>
-     </div>
-     <center style="    margin-top: 8px;">
+    </div>
+      <center style="    margin-top: 8px;">
         <label style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 14px;line-height: 19px;color: #6D6D6D;margin-left: -90px"> Día </label>  
-          <label style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 14px;line-height: 19px;color: #6D6D6D;    margin-left: 157px;">Hora</label>
+        <label style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 14px;line-height: 19px;color: #6D6D6D;    margin-left: 157px;">Hora</label>
       </center>
-     <div style="margin-top: 2px;">
-      
-       
+    
+    <div style="margin-top: 2px;">
       <div style="display: flex;justify-content: center;">  
         <div class="input-icons"> 
           <i class="icon" style="margin-left: -8px;"><img src="/svg/calendar_icon.svg"></i>
@@ -75,6 +72,12 @@ export default defineComponent({
       time : null,
       calendar : true,
       date_trivia_prev : null,
+      trivia : null,
+      level : null,
+      sub_theme : null,
+      trivia_id : null,
+      level_id : null,
+      sub_theme_id : null,
       attrs :[ 
         {
           dot: true,
@@ -109,6 +112,22 @@ export default defineComponent({
       ]
     }
   },
+  mounted(){
+    this.title = this.$route.query.title
+    this.description = this.$route.query.description
+    this.date = this.$route.query.date
+    this.time = this.$route.query.time
+
+    this.trivia_id = this.$route.query.trivia_id
+    this.level_id = this.$route.query.level_id
+    this.sub_theme_id = this.$route.query.sub_theme_id
+  
+    this.trivia = this.$route.query.trivia
+    this.level = this.$route.query.level
+    this.sub_theme = this.$route.query.sub_theme
+    this.user_ids = this.$route.query.user_ids ? this.$route.query.user_ids : ''
+    
+  },
   methods:{
     getDate($event){
       this.date_focus = false
@@ -134,12 +153,13 @@ export default defineComponent({
       }, 50);
     },
     getTime($event){
+      console.log($event)
       this.time_focus = false
-      if (moment(this.date+'/'+(new Date().getFullYear())+' '+$event.target.value).valueOf() < new Date().getTime()) {
+      /*if (moment(this.date+'/'+(new Date().getFullYear())+' '+$event.target.value).valueOf() < new Date().getTime()) {
         this.date_fail = true
       }else{
         this.date_fail = false
-      }
+      }*/
     },
     next(){
       if (this.date_fail) {
@@ -152,8 +172,24 @@ export default defineComponent({
         return
       }
       
-      this.$router.push({path : '/add_event_step_two',query : {title :  this.title,description :   this.description,date :  this.date,time :  this.time }})
-    },
+      this.$router.push({
+        path : '/add_event_step_two',
+        query : {
+          title : this.title,
+          description : this.description,
+          date :  this.date,
+          time :  this.time,
+          trivia_id : this.trivia_id,
+          level_id : this.level_id,
+          sub_theme_id : this.sub_theme_id, 
+          user_ids :  this.user_ids,
+          trivia :  this.trivia,
+          level :  this.level,
+          sub_theme :  this.sub_theme 
+        }
+      })
+
+    }
   }   
 });
 

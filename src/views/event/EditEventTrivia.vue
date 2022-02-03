@@ -160,6 +160,8 @@ export default defineComponent({
       trivias : [],
       levels : [],
       sub_themes : [],
+      time : null,
+      date : null,
       trivia : null,
       level : null,
       subtheme : {name: null},
@@ -175,8 +177,8 @@ export default defineComponent({
   mounted(){
     this.event = this.$route.query
     this.notify_before = this.event.notify_before == "true" ? true : false
-    this.date = new Date(this.event.starts_at).getDate()+'/'+(new Date(this.event.starts_at).getMonth()+1)
-    this.time = moment(this.event.starts_at).format('H:m')
+    this.date = new Date(this.event.starts_at.replace('Z', ' ').replace('T', ' ')).getDate()+'/'+(new Date(this.event.starts_at).getMonth()+1)
+    this.time = moment(this.event.starts_at.replace('Z', ' ').replace('T', ' ')).format('H:m')
     this.getTrivias()
     this.getLevels()
     this.getParticipants()
@@ -350,12 +352,13 @@ export default defineComponent({
 
       let loading = await toast.showLoading()
 
-       await loading.present(); 
-
+      await loading.present(); 
+      
+      var date_ = this.date.split('/')
       let data = {
         title : this.event.title,
         description : this.event.description,
-        starts_at : this.date+'/'+(new Date().getFullYear())+' '+this.time,
+        starts_at :  (new Date().getFullYear())+'-'+date_[1]+'-'+date_[0]+'T'+this.time,
         //trivia_id : this.trivia_id,
         level_id : this.level_id,
         subtheme_id: this.subtheme_id,

@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <p style="padding-left: 19px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 22px;color: #6D6D6D;">Certificaciones</p>
+      <p  v-if="certifications.length != 0"  style="padding-left: 19px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 22px;color: #6D6D6D;">Certificaciones</p>
 
       <ion-col style="display: flex; overflow-x: auto;white-space: nowrap;box-shadow: inherit;margin-left: 15px" >
         <template v-for="certification in certifications" :key="certification"> 

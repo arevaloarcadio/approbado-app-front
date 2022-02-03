@@ -48,11 +48,11 @@
         </div>
         <div style="display: flex;justify-content: center;margin-top: 5px;" > 
 
-          <div  style="width: 311px;margin-left: 10px;height: 68px;background: #FFFFFF;border-radius: 12px;" >
+          <div  style="width: 311px;margin-left: 10px;height: auto;background: #FFFFFF;border-radius: 12px;" >
             <ion-row>  
               <ion-col @click="redirections(event)">
                 
-                <svg  style="position: absolute;margin-top: 6px;"  width="7" height="45" viewBox="0 0 7 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg  style="position: absolute;margin-top: 6px;"  width="7"  viewBox="0 0 7 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect y="-1.52588e-05" width="6.07377" height="45" rx="3.03689" :fill="event.color"/>
                 </svg>
 
@@ -60,11 +60,11 @@
                       {{event.title}}
                 </p>
                 <p style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 12px;line-height: 22px;color: #6D6D6D;    margin-left: 27px;margin-top: -14px;">
-                  {{event.date_string}}<img src="svg/point_separator.svg" style="margin-left: 8px;position: absolute;margin-top: 10px;"> <span style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 12px;line-height: 22px;color: #333333;margin-left: 20px;position: absolute;margin-top: 0px;width: 80px;">{{moment(event.starts_at).format('h A')}}</span> 
+                  {{event.date_string}}<img src="svg/point_separator.svg" style="margin-left: 8px;position: absolute;margin-top: 10px;"> <span style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 12px;line-height: 22px;color: #333333;margin-left: 20px;position: absolute;margin-top: 0px;width: 80px;">{{moment(event.starts_at.replace('Z', ' ').replace('T', ' ')).format('h A')}}</span> 
                 </p>
               </ion-col>
               <ion-col>
-                <img src="svg/points.svg"   @click="openPopover($event,event)" style="margin-left: 118px;margin-top: 28px;">
+                <img src="svg/points.svg"  v-if="event.created_by == getUser.id" @click="openPopover($event,event)" style="margin-left: 118px;margin-top: 28px;">
               </ion-col>
             </ion-row>
           </div>

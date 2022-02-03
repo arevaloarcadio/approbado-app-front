@@ -140,7 +140,7 @@
         </div>
       </div>
 
-      <p style="padding-left: 19px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 22px;color: #6D6D6D;">Certificaciones</p>
+      <p v-if="certifications.length != 0"  style="padding-left: 19px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 22px;color: #6D6D6D;">Certificaciones</p>
 
       <ion-col style="display: flex; overflow-x: auto;white-space: nowrap;box-shadow: inherit;margin-left: 15px" >
         <template v-for="certification in certifications" :key="certification"> 
@@ -248,20 +248,7 @@ export default defineComponent({
       link_twitter : '',
       user_id : null,
       user : null,
-      certifications : [
-        {
-          name: 'Contratos <br> Approbado Oro',
-          icon: 'logro_oro.svg'
-        },
-        {
-          name: 'Divorcios <br> Approbado Plata',
-          icon: 'logro_plata.svg'
-        },
-        {
-          name: 'Divorcios <br> Approbado Plata',
-          icon: 'logro_plata.svg'
-        },
-      ],
+      certifications : [],
       tabs: [
         {
           title: 'Logros',
@@ -297,8 +284,8 @@ export default defineComponent({
       axios
       .get("/users/"+ this.user_id)
       .then(res => {
-        let profile = res.data.data
-        this.user = res.data.data
+        let profile = res.data
+        this.user = res.data
         this.ocupation = profile.profile.ocupation
         this.link_linkedin = profile.profile.linkedin
         this.link_twitter = profile.profile.twitter

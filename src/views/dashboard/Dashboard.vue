@@ -105,11 +105,11 @@
                       {{pending_event.title}}
                 </p>
                 <p style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 12px;line-height: 22px;color: #6D6D6D;    margin-left: 27px;margin-top: -14px;">
-                  {{pending_event.date_string}}<img src="svg/point_separator.svg" style="margin-left: 8px;position: absolute;margin-top: 10px;"> <span style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 12px;line-height: 22px;color: #333333;margin-left: 20px;position: absolute;margin-top: 0px;width: 80px;">{{moment(pending_event.starts_at).format('h A')}}</span> 
+                  {{pending_event.date_string}}<img src="svg/point_separator.svg" style="margin-left: 8px;position: absolute;margin-top: 10px;"> <span style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 12px;line-height: 22px;color: #333333;margin-left: 20px;position: absolute;margin-top: 0px;width: 80px;">{{moment(pending_event.starts_at.replace('Z', ' ').replace('T', ' ')).format('h A')}}</span> 
                 </p>
               </ion-col>
               <ion-col>
-                <img src="svg/points.svg"   @click="openPopover($event,pending_event)" style="margin-left: 118px;margin-top: 32px;">
+                <img src="svg/points.svg" v-if="pending_event.created_by == getUser.id" @click="openPopover($event,pending_event)" style="margin-left: 118px;margin-top: 32px;">
               </ion-col>
             </ion-row>
           </div>

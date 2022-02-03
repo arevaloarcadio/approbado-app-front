@@ -1,7 +1,7 @@
 <template>
   <ion-row>
        <ion-col>
-        <img src="svg/arrow_back.svg" @click="$router.go(-1)" style="margin-left: 36px;margin-top: 32px;">
+        <img src="svg/arrow_back.svg" @click="back()" style="margin-left: 36px;margin-top: 32px;">
           
            <p style="margin-top: -4px;font-family: Segoe UI;font-style: normal;text-align: center; font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;margin-top: -20px;">      Agendar una trivia</p>
       </ion-col>
@@ -22,18 +22,16 @@
         </div>
       </div>
       <div style="display: flex;justify-content: center;">
-        
-            <ion-checkbox color="primary" @click="notify_before =! notify_before" style="margin-top: 20px;margin-left: -32px;"></ion-checkbox>
-            &nbsp;
-            <p style="font-family: Segoe UI;font-style: normal;font-weight: normal;font-size: 14px;line-height: 19px;margin-top: 17px;">Enviar recordatorio 30 minutos antes de <br> la reunión</p>
-     
+        <ion-checkbox color="primary" @click="notify_before =! notify_before" style="margin-top: 20px;margin-left: -32px;"></ion-checkbox>
+        &nbsp;
+        <p style="font-family: Segoe UI;font-style: normal;font-weight: normal;font-size: 14px;line-height: 19px;margin-top: 17px;">Enviar recordatorio 30 minutos antes de <br> la reunión</p>
       </div>
       
 
       <div >
         <center>
-           <button class="button-primary font-button" @click="create_event()">Guardar trivia</button> <br>
-           <button class="button-line font-button" @click="create_event()" style="margin-top: 14px;">Descartar</button> 
+           <button class="button-primary font-button" @click="create_event()">Guardar trivia</button><br>
+           <!--<button class="button-line font-button" @click="create_event()" style="margin-top: 14px;">Descartar</button> -->
         </center>
       </div>
       
@@ -55,6 +53,7 @@ export default defineComponent({
       title : null,
       description : null,
       date : null,
+      date_format : null,
       time : null,
       trivia_id : null,
       level_id : null,
@@ -73,7 +72,17 @@ export default defineComponent({
     this.trivia_id = this.$route.query.trivia_id
     this.level_id = this.$route.query.level_id
     this.sub_theme_id = this.$route.query.sub_theme_id
+    
+    var date_ = this.$route.query.date.split('/')
+
+    this.date_format = (new Date().getFullYear())+'-'+date_[1]+'-'+date_[0]
+
+    this.trivia = this.$route.query.trivia
+    this.level = this.$route.query.level
+    this.sub_theme = this.$route.query.sub_theme
+
     this.user_ids = this.$route.query.user_ids.split('|')
+  
   },
   computed : {
     ...mapGetters([
@@ -90,7 +99,7 @@ export default defineComponent({
       let data = {
         title : this.title,
         description : this.description,
-        starts_at : this.date+'/'+(new Date().getFullYear())+' '+this.time,
+        starts_at :  this.date_format+'T'+this.time,
         //trivia_id : this.trivia_id,
         level_id : this.level_id,
         subtheme_id: this.sub_theme_id,
@@ -111,6 +120,24 @@ export default defineComponent({
          loading.dismiss()
         console.log(err)
       });
+    },
+    back(){
+      this.$router.push({
+        path : '/add_event_step_two', 
+        query : {
+          title : this.title,
+          description : this.description,
+          date : this.date,
+          time : this.time,
+          trivia :  this.trivia,
+          level :  this.level,
+          sub_theme :  this.sub_theme,
+          trivia_id : this.trivia_id,
+          level_id : this.level_id,
+          sub_theme_id : this.sub_theme_id, 
+          user_ids : this.$route.query.user_ids
+        }
+      })
     }
   }   
 });

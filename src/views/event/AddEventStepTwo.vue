@@ -1,7 +1,7 @@
 <template>
   <ion-row>
        <ion-col>
-        <img src="svg/arrow_back.svg" @click="$router.go(-1)" style="margin-left: 36px;margin-top: 32px;">
+        <img src="svg/arrow_back.svg" @click="back()" style="margin-left: 36px;margin-top: 32px;">
           
            <p style="margin-top: -4px;font-family: Segoe UI;font-style: normal;text-align: center; font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;margin-top: -20px;">Agendar una trivia</p>
       </ion-col>
@@ -85,7 +85,7 @@
       
         <center>
            <button class="button-primary font-button" @click="next">Agendar una reunión</button> <br>
-           <button class="button-line font-button" @click="$router.go(-1)" style="margin-top: 14px;">Regresar</button> 
+           <button class="button-line font-button" @click="back()" style="margin-top: 14px;">Regresar</button> 
         </center>
       </div>
       
@@ -111,6 +111,7 @@ export default defineComponent({
       date : null,
       time : null,
       users : [],
+      all_users : [],
       trivias : [],
       levels : [],
       sub_themes : [],
@@ -128,6 +129,20 @@ export default defineComponent({
     this.description = this.$route.query.description
     this.date = this.$route.query.date
     this.time = this.$route.query.time
+    
+    this.trivia_id = this.$route.query.trivia_id
+    this.level_id = this.$route.query.level_id
+    this.sub_theme_id = this.$route.query.sub_theme_id
+  
+    this.trivia = this.$route.query.trivia
+    this.level = this.$route.query.level
+    this.sub_theme = this.$route.query.sub_theme
+    this.user_ids = this.$route.query.user_ids ? this.$route.query.user_ids : ''
+    
+    if (this.user_ids != '') {
+      this.getUsers()
+    }
+    
     this.users.push({...this.getUser,disabled : true})
     //this.user_ids = this.getUser.id
     this.getTrivias()
@@ -139,7 +154,29 @@ export default defineComponent({
     ]),
   },
   methods:{
+    getUsers(){
+      axios
+      .get("/users")
+      .then(res => {
+        this.all_users = res.data.data
+        var user_ids = this.$route.query.user_ids.split('|')
 
+        this.all_users.forEach(user => {
+          user.selected = false
+          user_ids.forEach(user_id => {
+            if(user_id == user.id && user_id != this.getUser.id){
+              user.selected = true
+              user.disabled = false
+              this.users.push(user)
+            }
+          })
+        })
+
+      })
+      .catch(err => {
+        console.log(err)
+      });
+    },
     getTrivias(){
       axios
       .get("/trivias")
@@ -166,8 +203,8 @@ export default defineComponent({
       .then(res => {
         let sub_themes = [];
           res.data.data.forEach((data,key) =>{
-              sub_themes[key] = data
-              sub_themes[key]['name'] = data.name
+            sub_themes[key] = data
+            sub_themes[key]['name'] = data.name
           })
 
           this.sub_themes = sub_themes
@@ -286,6 +323,24 @@ export default defineComponent({
         }
       })
     },
+    back(){
+      this.$router.push({
+        path : '/add_event', 
+        query : {
+          title : this.title,
+          description : this.description,
+          date : this.date,
+          time : this.time,
+          trivia_id : this.trivia_id,
+          level_id : this.level_id,
+          sub_theme_id : this.sub_theme_id, 
+          user_ids :  this.user_ids,
+          trivia :  this.trivia,
+          level :  this.level,
+          sub_theme :  this.sub_theme
+        }
+      })
+    },
     next(){
 
       if (this.user_ids  === '') {
@@ -307,7 +362,10 @@ export default defineComponent({
           trivia_id : this.trivia_id,
           level_id : this.level_id,
           sub_theme_id : this.sub_theme_id, 
-          user_ids :  this.user_ids
+          user_ids :  this.user_ids,
+          trivia :  this.trivia,
+          level :  this.level,
+          sub_theme :  this.sub_theme
         }
       })
     }
