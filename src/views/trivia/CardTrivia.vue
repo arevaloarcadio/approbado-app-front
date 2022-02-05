@@ -207,7 +207,7 @@ export default defineComponent({
 		}
 	},
 	mounted(){
-		console.log(this.title.length)
+		this.show_ios()
 	},
 	methods:{
 	async show_ios(){
