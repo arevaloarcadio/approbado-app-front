@@ -159,6 +159,13 @@ export default defineComponent({
         this.date_fail = true
       }else{
         this.date_fail = false
+
+        pasar fecha venezuela a utc
+            let date = new Date(Date.UTC(2021, 5, 28, 3, 0, 0));
+        console.log('Date in India: ' + date);
+        let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });   
+        let usDate = formatter.format(date);
+        console.log('Date in USA: ' + usDate);
       }*/
     },
     next(){
