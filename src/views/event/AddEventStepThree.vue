@@ -43,8 +43,8 @@
 import { defineComponent } from 'vue';
 import { IonContent } from '@ionic/vue';
 import { mapGetters } from 'vuex'
-import axios from 'axios'
-import toast from '@/toast'
+//import axios from 'axios'
+//import toast from '@/toast'
 
 export default defineComponent({
   components: { IonContent },
@@ -92,11 +92,22 @@ export default defineComponent({
   methods:{
     async create_event(){
 
-    let loading = await toast.showLoading()
+  
+    let date = new Date(this.date_format+' '+this.time);
+    console.log('CURRENT Date: ' + date);
+    let formatter = new Intl.DateTimeFormat('es-ES',{ timeZone: "UTC", dateStyle: 'medium', timeStyle: 'medium' });   
+    let UTCDATE = formatter.format(date);
+    console.log('UTC Date: ' + UTCDATE);
+
+     
+
+      /*
+
+        let loading = await toast.showLoading()
 
     await loading.present(); 
 
-      let data = {
+let data = {
         title : this.title,
         description : this.description,
         starts_at :  this.date_format+'T'+this.time,
@@ -119,7 +130,7 @@ export default defineComponent({
       .catch(err => {
          loading.dismiss()
         console.log(err)
-      });
+      });*/
     },
     back(){
       this.$router.push({
