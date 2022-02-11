@@ -77,9 +77,9 @@ export default defineComponent({
       axios
       .get("/profile")
       .then(res => {
-        this.show_name = res.data.data.profile.show_name
-        this.public_profile = res.data.data.profile.public_profile
-        this.show_terms_privacy = res.data.data.profile.show_terms_privacy
+        this.show_name = res.data.profile.show_name
+        this.public_profile = res.data.profile.public_profile
+        this.show_terms_privacy = res.data.profile.show_terms_privacy
       })
       .catch(err => {
         console.log(err)

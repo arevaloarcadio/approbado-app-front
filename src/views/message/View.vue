@@ -18,12 +18,12 @@
       </center>
     </ion-col>
     <ion-col>
-      <center v-if="!chat.is_private">
+      <!--<center v-if="!chat.is_private">
         <img src="svg/report_chat.svg" @click="$router.push({ name : 'forum.report' , params : {comment_id : forum_id}})" style="margin-top: 28px;margin-left: -30px;z-index: 10;">
       </center>
       <center v-else>
         <img src="svg/report_chat.svg" @click="$router.push({ name : 'forum.report' , params : {comment_id : forum_id}})" style="margin-top: 38px;margin-left: -30px;z-index: 10;">
-      </center>
+      </center>-->
     </ion-col>
   </ion-row>
 

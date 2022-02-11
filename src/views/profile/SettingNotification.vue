@@ -90,10 +90,10 @@ export default defineComponent({
       axios
       .get("/profile")
       .then(res => {
-        this.general_notifications = res.data.data.profile.general_notifications
-        this.notify_email = res.data.data.profile.notify_email
-        this.notify_about_chat = res.data.data.profile.notify_about_chat
-        this.notify_about_comments = res.data.data.profile.notify_about_comments
+        this.general_notifications = res.data.profile.general_notifications
+        this.notify_email = res.data.profile.notify_email
+        this.notify_about_chat = res.data.profile.notify_about_chat
+        this.notify_about_comments = res.data.profile.notify_about_comments
       })
       .catch(err => {
         console.log(err)

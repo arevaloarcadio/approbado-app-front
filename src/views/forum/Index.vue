@@ -1,3 +1,4 @@
+
 <template>
 
   <ion-content class="ion-padding" @ionscrollend="loadData($event)" :scrollEvents="true">
@@ -73,7 +74,7 @@
             <img :src="$base_public+forum?.owner?.picture" style="position: absolute;margin-left: 15px;margin-top: 13px;width: 36px;height: 36px;border-radius: 25px;">
           </div>
           <p style="width: 65%;margin-left: 64px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;" @click="$router.push({name : 'forum.details',params : { forum_id : forum.id} , query : {...forum }})">{{forum.message}}</p>
-          <img src="svg/points_vertical.svg" @click="openPopoverReport($event)" style="position: absolute;margin-left: 288px;margin-top: -39px;">
+          <img src="svg/points_vertical.svg" @click="openPopoverReport($event,forum.id)" style="position: absolute;margin-left: 288px;margin-top: -39px;">
            <br>
            <p style="margin-left: 65px;margin-top: -30px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 15px;line-height: 20px;color: #6D6D6D;">Por <span  style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 15px;line-height: 20px;color: #101521;">{{forum?.owner?.names}} </span></p>
            <br>

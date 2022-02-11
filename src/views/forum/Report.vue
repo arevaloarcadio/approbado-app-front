@@ -99,7 +99,7 @@ export default defineComponent({
 	methods :{
 		getReportReasons(){
 			axios
-			.get("/report-reason")
+			.get("/report-reasons")
 			.then(res => {
 				this.report_reasons = res.data.data
 			})
@@ -113,13 +113,13 @@ export default defineComponent({
 			await loading.present()
 
 			let data = {
-				report_reason_id : this.report_reason_id,
-				reported_by : this.getUser.id,
+				reason_id : this.report_reason_id,
+				//reported_by : this.getUser.id,
 				post_id :this.post_id
 			}  
 
 			axios
-			.post("/report-reason",data)
+			.post("/reports",data)
 			.then(res => {
 				loading.dismiss()
 				this.$router.push({name : 'dashboard',query :{message :"Reporte registrado existosamente"}})

@@ -1,7 +1,7 @@
 <template>
   <ion-row>
     <ion-col>
-      <img src="svg/arrow_back.svg" @click="$router.go(-1)" style="margin-left: 36px;margin-top: 32px;">
+      <img src="svg/arrow_back.svg" @click="$router.push('/create_event')" style="margin-left: 36px;margin-top: 32px;">
       <p style="margin-top: -4px;font-family: Segoe UI;font-style: normal;text-align: center; font-weight: 600;font-size: 18px;line-height: 24px;color: #000000;margin-top: -20px;">      
         Agendar una trivia
       </p>
