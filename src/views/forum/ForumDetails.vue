@@ -209,7 +209,7 @@ export default defineComponent({
       await loading.present(); 
 
       axios
-      .delete("/like-posts/"+post_id+'/'+this.getUser.id)
+      .delete("/like-posts/"+post_id)
       .then(res => {
         console.log(res)
         //toast.openToast("Comentario registrado existosamente","success",2000)
