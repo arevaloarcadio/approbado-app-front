@@ -457,6 +457,17 @@ opacity: 0.25;
 filter: blur(8px);
 }
 
+.modal-trivia-out .modal-wrapper {
+  width: 311px;
+  height: 220px;
+  margin-top: -8%;
+  background: #FFFFFF;
+/* Plomo cuaternario */
+
+border: 1px solid #B7B7B7;
+box-sizing: border-box;
+border-radius: 8px;
+}
 .modal-trivia .modal-wrapper {
   width: 311px;
   height: 292px;

@@ -12,13 +12,16 @@
   <p style="padding-left: 16px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 20px;line-height: 32px;color: #000000;">¡Genial! Estas a punto de iniciar,<br> elige en nivel de dificultad</p>
   <img src="svg/balance_lower.svg" style="margin-top: -5px;margin-left: 16px;"> <label style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 17px;line-height: 23px;color: #232730;">{{trivia_name}} </label>
 
-<ion-col  style="display: flex;white-space: nowrap;box-shadow: inherit;">
+<ion-row>
+<ion-col size="4">
 
  <p style="padding-left: 14px;font-family: Segoe UI;font-style: normal;font-weight: normal;font-size: 18px;line-height: 24px;color: #000000;margin-top: 8px;">Tema: </p> 
- 
-  <span style="display: flex;flex-direction: row;align-items: flex-start;padding: 4px 8px;background: #EAEAEA;border-radius: 6px;flex: none;order: 1;flex-grow: 0;margin: 0px 10px;width: auto;height: 29px;    margin-top: 6px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 21px;color: #333333;">{{subtheme_name}}</span>
+ </ion-col>
+ <ion-col size="8">
+  <button style="padding: 4px 8px;background: #EAEAEA;border-radius: 6px;flex: none;order: 1;flex-grow: 0;margin: 0px 10px;height: auto;     margin-left: -45px;   margin-top: 6px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 21px;color: #333333;">{{subtheme_name}}</button>
 
 </ion-col>
+</ion-row>
 <p style="padding-left: 16px;font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 16px;line-height: 21px;color: #000000;">
   Selecciona un nivel
  <br>

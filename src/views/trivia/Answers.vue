@@ -1,7 +1,7 @@
 <template>
 <ion-row  style="margin-top: 32px">
 <ion-col>
-	<img src="svg/arrow_back.svg"  @click="$router.go(-1)" style="margin-left: 26px;">
+	<img src="svg/arrow_back.svg"  @click="openModalOut()" style="margin-left: 26px;">
 </ion-col>
 <ion-col>
 <img src="svg/logo_dashboard.svg" style="margin-left: -68px;">
@@ -15,7 +15,7 @@
     {{countdown}}
   </p>
   <div v-if="grupal">
-  <div  >
+  <div>
     <p style="font-family: Segoe UI;font-style: normal;font-weight: 600;font-size: 14px;line-height: 19px;color: #000000;margin-left: 15px;">Tú</p><br>
     <img :src="$base_public+getUser.picture" style="width: 36px;height: 36px;border-radius: 25px;margin-left: 13px;margin-top: -50px;">
   </div>
@@ -65,6 +65,7 @@ import moment from 'moment'
 import { mapGetters} from "vuex";
 import { createAnimation,modalController } from '@ionic/vue';
 import ViewResult from './ViewResult'
+import ModalOutTrivia from './ModalOutTrivia'
 import io from '@/plugins/socket-io'
 import axios from 'axios'
 import toast from '@/toast'
@@ -77,7 +78,6 @@ export default defineComponent({
 	name: 'App',
   data(){
     return{
-      
       response : null,
       selected_response : false,
       time : 0,
@@ -138,7 +138,6 @@ export default defineComponent({
   },
   mounted(){
   
-
     this.total_answers = this.$route.query.questions
     this.time = this.$route.query.duration
     this.level_id = this.$route.query.level
@@ -162,6 +161,14 @@ export default defineComponent({
     
     this.getQuestions()
     //this.init_time() 
+    var self = this
+    document.addEventListener('ionBackButton', (ev) => {
+      ev.detail.register(100, () => {
+        if (self.$route.name == 'answers') {
+          this.openModalOut() 
+        }
+      });
+    });
   },
   computed : {
     ...mapGetters([
@@ -392,6 +399,28 @@ export default defineComponent({
         console.log(err)
       });
     
+    },
+    async openModalOut() {
+    
+      const modal = await modalController
+        .create({
+          component: ModalOutTrivia ,
+          keyboardClose : true,
+          backdropDismiss : true,
+          cssClass: 'modal-trivia-out',
+          enterAnimation: this.enterAnimation,
+          leaveAnimation: this.leaveAnimation,
+          componentProps : {
+            level_id : this.level_id,
+            subtheme_id : this.subtheme_id 
+          }     
+        })
+      
+      modal.present();
+      
+      modal.onDidDismiss().then((data) => {
+        console.log(data)
+      })
     },
     enterAnimation : function () {
       let baseEl = document

@@ -68,7 +68,8 @@ export default defineComponent({
       subtheme_id : null,
       duration : 0,
       questions : 0,
-      award_id : null
+      award_id : null,
+      loading : null
     }
   },
   mounted(){
@@ -90,15 +91,15 @@ export default defineComponent({
   },
   methods : {
     async getDetails(){
-      var loading = await toast.showLoading()
+      this.loading = await toast.showLoading()
 
-      await loading.present();
+      await this.loading.present();
 
       Promise.all([
         this.getSubtheme(),
         this.getQuestions()
       ]).finally(() => {
-        loading.dismiss()
+       
       });
      
     },
@@ -116,11 +117,12 @@ export default defineComponent({
       axios
       .get("/questions?filter[subtheme_id]="+this.subtheme_id+"&filter[level_id]="+this.level)
       .then(res => {
+        this.loading.dismiss()
         this.questions = res.data.total
        // this.duration = res.data.duration
       })
       .catch(err => {
-        //this.loading.dismiss()
+        this.loading.dismiss()
         console.log(err)
       });
     },
