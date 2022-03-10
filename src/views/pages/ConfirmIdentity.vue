@@ -129,6 +129,9 @@ export default defineComponent({
     },
     timer() {
       if (this.count <= 0) {
+        for (var i = 0; i < 99999; i++) {
+          clearInterval(i);
+        }
         clearInterval(this.counter);
         return;
       }
@@ -144,6 +147,7 @@ export default defineComponent({
       
       if (seconds <= 0 && milliseconds <= 0) {
         this.count_active = false
+        
       } else {
         this.countdown = seconds;
       }

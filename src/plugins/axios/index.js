@@ -4,7 +4,7 @@ import jwtToken from '@/plugins/jwt/jwt-token.js'
 import axios from 'axios'
 import toast from '@/toast'
 
-axios.defaults.baseURL = 'https://api-approbado.alaxatech.com/';
+axios.defaults.baseURL = 'https://api-approbado.villakid.com/';
 //axios.defaults.baseURL = 'http://192.168.43.131:4000/';
 
 
